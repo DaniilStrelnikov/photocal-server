@@ -5,6 +5,7 @@ import express, { Application } from "express";
 import { connectDB } from "./config/db";
 import router from "./routes";
 import { router as userRouter } from "./routes/users";
+import cors from "cors";
 
 // Подключение к базе данных
 // connectDB();
@@ -13,6 +14,7 @@ const app: Application = express();
 
 // Middlewares
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/api", router);
