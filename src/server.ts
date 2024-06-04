@@ -7,14 +7,29 @@ import router from "./routes";
 import { router as userRouter } from "./routes/users";
 import cors from "cors";
 
-// Подключение к базе данных
-// connectDB();
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+
+var passport = require("passport");
 
 const app: Application = express();
+
+connectDB();
 
 // Middlewares
 app.use(express.json());
 app.use(cors());
+
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({ secret: "SECRET" }));
+
+// Passport:
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./config/passport.ts");
 
 // Routes
 app.use("/api", router);
