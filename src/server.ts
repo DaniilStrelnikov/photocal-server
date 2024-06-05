@@ -3,13 +3,12 @@ dotenv.config({ path: ".env" });
 
 import express, { Application } from "express";
 import { connectDB } from "./config/db";
-import router from "./routes";
-import { router as userRouter } from "./routes/users";
 import cors from "cors";
 
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import { router } from "./routes";
 
 var passport = require("passport");
 
@@ -33,7 +32,6 @@ require("./config/passport.ts");
 
 // Routes
 app.use("/api", router);
-app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 

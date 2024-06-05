@@ -11,7 +11,7 @@ export const JWT_OPTIONS = {
 const strategy = new Strategy(
 	JWT_OPTIONS,
 	async (jwt_payload: any, cb: any) => {
-		const user = await User.find({ email: jwt_payload.email });
+		const user = await User.findOne({ username: jwt_payload.email });
 		if (!user) return cb(null, false);
 		return cb(null, user);
 	}
